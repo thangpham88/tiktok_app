@@ -2,11 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
 :root {
-  --primary: #fe2c55;
+  --primary: rgb(254, 44, 85);
+  --primary-text-color: rgba(22, 24, 35, 1);
+  --primary-link-color: rgba(22, 24, 35, 1);
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -20,4 +24,8 @@ body {
   font-size: 1.6rem;
   line-height: 1.5;
   text-rendering: optimizeSpeed;
+}
+
+a {
+  text-decoration: none;
 }
