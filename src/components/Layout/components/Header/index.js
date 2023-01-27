@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEllipsisVertical,
@@ -6,19 +6,26 @@ import {
   faMagnifyingGlass,
   faPlus,
   faRobot,
-  faSpinner,
   faXmarkCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
+import Tippy from '@tippyjs/react/headless'; // different import path!
+import 'tippy.js/dist/tippy.css'; // optional
 
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
 import { Link } from 'react-router-dom';
+import { PopperWrapper } from '~/components/Popper';
+import AccountItem from '~/components/SearchResultItem/AccountItem';
+import SearchItem from '~/components/SearchResultItem/SearchItem';
+import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
 
 function Header() {
+  const [searchInput, setSearchInput] = useState([]);
+  const searchInputElement = useRef();
   const loggedIn = false;
 
   const getHeaderAction = () => {
@@ -39,9 +46,9 @@ function Header() {
     } else {
       return (
         <>
-          <Link className={cx('login-container')} to="/login">
-            <button className={cx('login-btn')}>Login</button>
-          </Link>
+          <Button primary small>
+            Login
+          </Button>
 
           <div className={cx('see-more')}>
             <FontAwesomeIcon icon={faEllipsisVertical} />
@@ -49,6 +56,23 @@ function Header() {
         </>
       );
     }
+  };
+
+  const handleReset = () => {
+    setSearchInput('');
+    searchInputElement.current.focus();
+  };
+
+  const getSearchPopper = () => {
+    return (
+      <div>
+        <SearchItem search_input="Mia💫" />
+        <SearchItem search_input="Mia dance girl💫" />
+        <SearchItem search_input="Music dance" />
+        <h3 className={cx('sug-account')}>Accounts</h3>
+        <AccountItem />
+      </div>
+    );
   };
 
   return (
@@ -59,28 +83,51 @@ function Header() {
             <img src={images.logo} alt="TikTok"></img>
           </Link>
         </div>
-        <div className={cx('search-box')}>
-          <input type="search" className={cx('search-input')} placeholder="Search accounts and videos"></input>
 
-          <div className={cx('search-loading')}>
-            <FontAwesomeIcon icon={faSpinner} />
-          </div>
-          <div className={cx('search-reset')}>
-            <FontAwesomeIcon icon={faXmarkCircle} />
-          </div>
-
-          <span className={cx('span-spliter')}></span>
-          <button className={cx('search-button')}>
-            <FontAwesomeIcon className={cx('search-icon')} icon={faMagnifyingGlass} />
-          </button>
-        </div>
-        <div className={cx('header-actions')}>
-          <Link className={cx('upload-container')} to="/upload">
-            <div className={cx('upload')}>
-              <FontAwesomeIcon className={cx('upload-icon')} icon={faPlus} />
-              <span className={cx('span-upload')}>Upload</span>
+        <Tippy
+          delay={100}
+          placement="bottom-start"
+          interactive
+          visible={searchInput.length > 0}
+          render={(attrs) => (
+            <div className={cx('search-result-suggest')} tabIndex="-1" {...attrs}>
+              <PopperWrapper>{getSearchPopper()}</PopperWrapper>
             </div>
-          </Link>
+          )}
+        >
+          <div className={cx('search-box')}>
+            <div className={cx('search-left')}>
+              <input
+                className={cx('search-input')}
+                placeholder="Search accounts and videos"
+                value={searchInput}
+                ref={searchInputElement}
+                onChange={(e) => setSearchInput(e.target.value)}
+              ></input>
+
+              {searchInput.length > 0 && (
+                <>
+                  {/* <div className={cx('search-loading')}>
+                  <FontAwesomeIcon icon={faSpinner} />
+                </div> */}
+                  <div className={cx('search-reset')} onClick={handleReset}>
+                    <FontAwesomeIcon icon={faXmarkCircle} />
+                  </div>
+                </>
+              )}
+            </div>
+            <div className={cx('search-right')}>
+              <span className={cx('span-spliter')}></span>
+              <button className={cx('search-button')}>
+                <FontAwesomeIcon className={cx('search-icon')} icon={faMagnifyingGlass} />
+              </button>
+            </div>
+          </div>
+        </Tippy>
+        <div className={cx('header-actions')}>
+          <Button to="/upload" leftIcon={<FontAwesomeIcon className={cx('btn-icon')} icon={faPlus} />}>
+            Upload
+          </Button>
 
           {getHeaderAction()}
         </div>

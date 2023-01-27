@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(255, 255, 255, 1);
+  z-index: 1000;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1150px;
+  width: 100%;
+  height: auto;
+  padding-right: 24px;
+  padding-left: 20px;
+}
+
+.content {
+  width: 100%;
+  padding: 24px 0;
+}
