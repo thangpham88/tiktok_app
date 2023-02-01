@@ -7,19 +7,20 @@ import {
   faPlus,
   faRobot,
   faXmarkCircle,
+  faKeyboard,
+  faLanguage,
+  faMoon,
+  faQuestionCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
-import Tippy from '@tippyjs/react/headless'; // different import path!
-import 'tippy.js/dist/tippy.css'; // optional
 
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
 import { Link } from 'react-router-dom';
-import { PopperWrapper } from '~/components/Popper';
-import AccountItem from '~/components/SearchResultItem/AccountItem';
-import SearchItem from '~/components/SearchResultItem/SearchItem';
 import Button from '~/components/Button';
+import MenuHeader from '~/components/Popper/MenuHeader';
+import SearchResults from '~/components/Popper/SearchResults';
 
 const cx = classNames.bind(styles);
 
@@ -28,51 +29,16 @@ function Header() {
   const searchInputElement = useRef();
   const loggedIn = false;
 
-  const getHeaderAction = () => {
-    if (loggedIn) {
-      return (
-        <>
-          <div className={cx('message')}>
-            <FontAwesomeIcon icon={faPaperPlane} />
-          </div>
-          <div className={cx('inbox')}>
-            <FontAwesomeIcon icon={faInbox} />
-          </div>
-          <div className={cx('profile')}>
-            <FontAwesomeIcon icon={faRobot} />
-          </div>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <Button primary small>
-            Login
-          </Button>
-
-          <div className={cx('see-more')}>
-            <FontAwesomeIcon icon={faEllipsisVertical} />
-          </div>
-        </>
-      );
-    }
-  };
+  const MENU_HEADER = [
+    { title: 'English', icon: <FontAwesomeIcon icon={faLanguage} />, toogleOnOff: false },
+    { title: 'Feedback and help', icon: <FontAwesomeIcon icon={faQuestionCircle} />, toogleOnOff: false },
+    { title: 'Keyboard shortcuts', icon: <FontAwesomeIcon icon={faKeyboard} />, toogleOnOff: false },
+    { title: 'Dark mode', icon: <FontAwesomeIcon icon={faMoon} />, toogleOnOff: true },
+  ];
 
   const handleReset = () => {
     setSearchInput('');
     searchInputElement.current.focus();
-  };
-
-  const getSearchPopper = () => {
-    return (
-      <div>
-        <SearchItem search_input="Mia💫" />
-        <SearchItem search_input="Mia dance girl💫" />
-        <SearchItem search_input="Music dance" />
-        <h3 className={cx('sug-account')}>Accounts</h3>
-        <AccountItem />
-      </div>
-    );
   };
 
   return (
@@ -84,17 +50,7 @@ function Header() {
           </Link>
         </div>
 
-        <Tippy
-          delay={100}
-          placement="bottom-start"
-          interactive
-          visible={searchInput.length > 0}
-          render={(attrs) => (
-            <div className={cx('search-result-suggest')} tabIndex="-1" {...attrs}>
-              <PopperWrapper>{getSearchPopper()}</PopperWrapper>
-            </div>
-          )}
-        >
+        <SearchResults visible={searchInput.length > 0}>
           <div className={cx('search-box')}>
             <div className={cx('search-left')}>
               <input
@@ -123,13 +79,38 @@ function Header() {
               </button>
             </div>
           </div>
-        </Tippy>
+        </SearchResults>
+
         <div className={cx('header-actions')}>
           <Button to="/upload" leftIcon={<FontAwesomeIcon className={cx('btn-icon')} icon={faPlus} />}>
             Upload
           </Button>
+          {loggedIn && (
+            <>
+              <div className={cx('message')}>
+                <FontAwesomeIcon icon={faPaperPlane} />
+              </div>
+              <div className={cx('inbox')}>
+                <FontAwesomeIcon icon={faInbox} />
+              </div>
+              <div className={cx('profile')}>
+                <FontAwesomeIcon icon={faRobot} />
+              </div>
+            </>
+          )}
+          {!loggedIn && (
+            <>
+              <Button primary small>
+                Login
+              </Button>
 
-          {getHeaderAction()}
+              <MenuHeader items={MENU_HEADER}>
+                <div className={cx('see-more')}>
+                  <FontAwesomeIcon icon={faEllipsisVertical} />
+                </div>
+              </MenuHeader>
+            </>
+          )}
         </div>
       </div>
     </div>
