@@ -126,6 +126,7 @@
     width: 32px;
     height: 32px;
     padding-top: 5px;
+    user-select: none;
   }
 
   .see-more {
@@ -141,13 +142,14 @@
     align-items: center;
     margin-left: 12px;
     cursor: pointer;
-    width: 32px;
-    height: 32px;
     padding: 3px 3px 0;
+    user-select: none;
 
-    svg {
-      width: 22px;
-      height: 22px;
+    .profileImg {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
     }
   }
 }

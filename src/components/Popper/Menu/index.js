@@ -24,11 +24,13 @@ function Menu({ children, items = [] }) {
           title={menuItem.title}
           icon={menuItem.icon}
           toogleOnOff={menuItem.toogleOnOff}
+          splitterTop={menuItem.splitterTop}
           onClick={() => {
             if (isParent) {
               setHistory((prev) => [...prev, menuItem.children]);
             } else {
               console.log(menuItem);
+              menuItem.onClick && menuItem.onClick();
             }
           }}
         />
@@ -40,6 +42,7 @@ function Menu({ children, items = [] }) {
     <Tippy
       delay={[100, 500]}
       placement="bottom-end"
+      offset={[10, 10]}
       interactive
       render={(attrs) => (
         <div className={cx('see-more-menu')} tabIndex="-1" {...attrs}>

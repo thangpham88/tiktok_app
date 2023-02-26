@@ -5,14 +5,14 @@ import Switch from 'react-switch';
 
 const cx = classNames.bind(styles);
 
-function MenuItem({ title, icon, toogleOnOff = false, onClick }) {
+function MenuItem({ title, icon, toogleOnOff = false, splitterTop = false, onClick }) {
   const [checked, setChecked] = useState(false);
   const handleToogleChange = (nextChecked) => {
     setChecked(nextChecked);
   };
 
   return (
-    <div className={cx('wrapper')} onClick={onClick}>
+    <div className={cx('wrapper', { splitterTop })} onClick={onClick}>
       {!!icon && <div className={cx('menuItem-icon')}>{icon}</div>}
 
       {!toogleOnOff && (

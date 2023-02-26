@@ -2,17 +2,17 @@ import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEllipsisVertical,
-  faInbox,
-  faMagnifyingGlass,
   faPlus,
-  faRobot,
   faXmarkCircle,
   faKeyboard,
   faLanguage,
   faMoon,
   faQuestionCircle,
+  faVideoCamera,
+  faUserCog,
+  faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
-import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
@@ -23,13 +23,17 @@ import Menu from '~/components/Popper/Menu';
 import SearchResults from '~/components/Popper/SearchResults';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
+import { faTiktok } from '@fortawesome/free-brands-svg-icons';
+import { IconEffects, IconInbox, IconSearch, IconSendMessage } from '~/components/Icon';
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
 function Header() {
+  const defaultUser = { id: '12345', name: 'thang_pham88' };
   const [searchInput, setSearchInput] = useState([]);
   const searchInputElement = useRef();
-  const loggedIn = false;
+  const [currentUser, setCurrentUser] = useState(defaultUser);
 
   const MENU_HEADER = [
     {
@@ -77,9 +81,25 @@ function Header() {
         ],
       },
     },
-    { title: 'Feedback and help', icon: <FontAwesomeIcon icon={faQuestionCircle} />, toogleOnOff: false },
-    { title: 'Keyboard shortcuts', icon: <FontAwesomeIcon icon={faKeyboard} />, toogleOnOff: false },
+    { title: 'Feedback and help', icon: <FontAwesomeIcon icon={faQuestionCircle} /> },
+    { title: 'Keyboard shortcuts', icon: <FontAwesomeIcon icon={faKeyboard} /> },
     { title: 'Dark mode', icon: <FontAwesomeIcon icon={faMoon} />, toogleOnOff: true },
+  ];
+
+  const MENU_USER = [
+    { title: 'View Profile', icon: <FontAwesomeIcon icon={faUser} /> },
+    { title: 'Get Coins', icon: <FontAwesomeIcon icon={faTiktok} /> },
+    { title: 'LIVE Studio', icon: <FontAwesomeIcon icon={faVideoCamera} /> },
+    { title: 'Settings', icon: <FontAwesomeIcon icon={faUserCog} /> },
+    ...MENU_HEADER,
+    {
+      title: 'Log out',
+      icon: <FontAwesomeIcon icon={faSignOut} />,
+      splitterTop: true,
+      onClick: () => {
+        setTimeout(() => setCurrentUser(), 500);
+      },
+    },
   ];
 
   const handleReset = () => {
@@ -124,7 +144,7 @@ function Header() {
               <div className={cx('search-right')}>
                 <span className={cx('span-spliter')}></span>
                 <button className={cx('search-button')}>
-                  <FontAwesomeIcon className={cx('search-icon')} icon={faMagnifyingGlass} />
+                  <IconSearch />
                 </button>
               </div>
             </div>
@@ -137,26 +157,40 @@ function Header() {
               Upload
             </Button>
 
-            {loggedIn && (
+            {currentUser ? (
               <>
-                <div className={cx('message')}>
-                  <FontAwesomeIcon icon={faPaperPlane} />
-                </div>
-                <div className={cx('inbox')}>
-                  <FontAwesomeIcon icon={faInbox} />
-                </div>
-                <div className={cx('profile')}>
-                  <FontAwesomeIcon icon={faRobot} />
-                </div>
+                <Tippy content={<span>Create effects</span>} delay={100} interactive>
+                  <a className={cx('btn-create-effects')} href="https://effecthouse.tiktok.com/">
+                    <IconEffects />
+                  </a>
+                </Tippy>
+
+                <Tippy content={<span>Messages</span>} delay={100} interactive>
+                  <div className={cx('message')}>
+                    <IconSendMessage />
+                  </div>
+                </Tippy>
+
+                <Tippy content={<span>Inbox</span>} delay={100} interactive>
+                  <div className={cx('inbox')}>
+                    <IconInbox />
+                  </div>
+                </Tippy>
+                <Menu items={MENU_USER}>
+                  <div className={cx('profile')}>
+                    <Image src={images.profile_ava_demo} className={cx('profileImg')} alt="Profile" />
+                  </div>
+                </Menu>
               </>
-            )}
-            {!loggedIn && (
+            ) : (
               <>
-                <Button primary>Login</Button>
+                <Button primary onClick={() => setTimeout(() => setCurrentUser(defaultUser), 500)}>
+                  Login
+                </Button>
 
                 <Tippy content={<span>Create effects</span>} delay={100} interactive>
                   <a className={cx('btn-create-effects')} href="https://effecthouse.tiktok.com/">
-                    <img src={images.effects} alt="Create effects" />
+                    <IconEffects />
                   </a>
                 </Tippy>
 
