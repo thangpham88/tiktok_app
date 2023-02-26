@@ -9,6 +9,20 @@
   --white: #fff;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c0bfbf;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

@@ -3,7 +3,6 @@
   justify-content: space-around;
   align-items: center;
   background: rgba(255, 255, 255, 1);
-  height: 60px;
   box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
   z-index: 1000;
   position: relative;
@@ -19,6 +18,10 @@
   height: 60px;
   padding-right: 24px;
   padding-left: 20px;
+
+  .leftContainer {
+    min-width: 300px;
+  }
 }
 
 .search-box {
@@ -30,14 +33,13 @@
   border-radius: 92px;
   position: relative;
   overflow: hidden;
-  border: 1.5px solid transparent;
 
   &:focus-within {
     border: 1.5px solid rgba(94, 92, 92, 0.4);
   }
 
   .search-left {
-    width: 28rem;
+    width: 29.2rem;
     display: flex;
     justify-content: space-between;
     overflow: hidden;
@@ -76,7 +78,7 @@
   }
 
   .search-right {
-    width: 15%;
+    width: 5.2rem;
     display: flex;
 
     .span-spliter {
@@ -116,6 +118,15 @@
   display: flex;
   align-items: center;
   justify-items: center;
+
+  .btn-create-effects {
+    margin-left: 16px;
+    cursor: pointer;
+    padding: 0 4px;
+    width: 32px;
+    height: 32px;
+    padding-top: 5px;
+  }
 
   .see-more {
     margin-left: 16px;

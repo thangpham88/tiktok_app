@@ -9,7 +9,6 @@ import AccountItem from './AccountItem';
 const cx = classNames.bind(styles);
 
 function SearchResults({ children, visible }) {
-  console.log(visible);
   return (
     <Tippy
       delay={100}
