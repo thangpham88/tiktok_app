@@ -1,9 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEllipsisVertical,
   faPlus,
-  faXmarkCircle,
   faKeyboard,
   faLanguage,
   faMoon,
@@ -20,19 +19,17 @@ import images from '~/assets/images';
 import { Link } from 'react-router-dom';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
-import SearchResults from '~/components/Popper/SearchResults';
+import SearchBox from '~/components/Popper/SearchBox';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 import { faTiktok } from '@fortawesome/free-brands-svg-icons';
-import { IconEffects, IconInbox, IconSearch, IconSendMessage } from '~/components/Icon';
+import { IconEffects, IconInbox, IconSendMessage } from '~/components/Icon';
 import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
 function Header() {
   const defaultUser = { id: '12345', name: 'thang_pham88' };
-  const [searchInput, setSearchInput] = useState([]);
-  const searchInputElement = useRef();
   const [currentUser, setCurrentUser] = useState(defaultUser);
 
   const MENU_HEADER = [
@@ -102,11 +99,6 @@ function Header() {
     },
   ];
 
-  const handleReset = () => {
-    setSearchInput('');
-    searchInputElement.current.focus();
-  };
-
   return (
     <div className={cx('wrapper')}>
       <div className={cx('header')}>
@@ -119,36 +111,8 @@ function Header() {
         </div>
 
         <div className={cx('centerContainer')}>
-          <SearchResults visible={searchInput.length > 0}>
-            <div className={cx('search-box')}>
-              <div className={cx('search-left')}>
-                <input
-                  className={cx('search-input')}
-                  placeholder="Search accounts and videos"
-                  value={searchInput}
-                  ref={searchInputElement}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                ></input>
-
-                {searchInput.length > 0 && (
-                  <>
-                    {/* <div className={cx('search-loading')}>
-                  <FontAwesomeIcon icon={faSpinner} />
-                </div> */}
-                    <div className={cx('search-reset')} onClick={handleReset}>
-                      <FontAwesomeIcon icon={faXmarkCircle} />
-                    </div>
-                  </>
-                )}
-              </div>
-              <div className={cx('search-right')}>
-                <span className={cx('span-spliter')}></span>
-                <button className={cx('search-button')}>
-                  <IconSearch />
-                </button>
-              </div>
-            </div>
-          </SearchResults>
+          {/* Search div */}
+          <SearchBox />
         </div>
 
         <div className={cx('rightContainer')}>

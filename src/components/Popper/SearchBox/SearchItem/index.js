@@ -6,14 +6,14 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
-function SearchItem({ search_input }) {
+function SearchItem({ data }) {
   return (
     <div className={cx('wrapper')}>
       <div className={cx('search-icon')}>
         <FontAwesomeIcon icon={faSearch} />
       </div>
       <div className={cx('search-text')}>
-        <span>{search_input}</span>
+        <span>{data}</span>
       </div>
     </div>
   );

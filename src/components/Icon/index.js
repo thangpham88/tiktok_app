@@ -22,9 +22,9 @@ export const IconInbox = ({ width = '32px', height = '32px', color = 'black' }) 
   );
 };
 
-export const IconSearch = ({ width = '24px', height = '24px', color = 'rgba(22, 24, 35, .34)' }) => {
+export const IconSearch = ({ width = '24px', height = '24px' }) => {
   return (
-    <svg width={width} height={height} viewBox="0 0 48 48" fill={color} xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
