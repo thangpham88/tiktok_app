@@ -11,7 +11,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
-function Menu({ children, items = [] }) {
+function Menu({ children, items = [], hideOnClick = false }) {
   const [history, setHistory] = useState([{ data: items }]);
   const current = history[history.length - 1];
 
@@ -63,6 +63,7 @@ function Menu({ children, items = [] }) {
       onHide={() => {
         history.length > 1 && setHistory((prev) => prev.slice(0, prev.length - 1));
       }}
+      hideOnClick={hideOnClick}
     >
       {children}
     </Tippy>

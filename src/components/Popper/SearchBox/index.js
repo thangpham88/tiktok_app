@@ -41,6 +41,12 @@ function SearchBox() {
     searchInputElement.current.focus();
   };
 
+  const handleSearchChange = (query) => {
+    if (!query.startsWith(' ')) {
+      setSearchValue(query);
+    }
+  };
+
   return (
     <Tippy
       delay={100}
@@ -68,7 +74,7 @@ function SearchBox() {
           placeholder="Search accounts and videos"
           value={searchValue}
           ref={searchInputElement}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => handleSearchChange(e.target.value)}
           onFocus={() => setSearchActive(true)}
         ></input>
 
@@ -86,7 +92,7 @@ function SearchBox() {
           </>
         )}
         <span className={cx('span-spliter')}></span>
-        <button className={cx('search-button')}>
+        <button className={cx('search-button')} onMouseDown={(e) => e.preventDefault()}>
           <IconSearch />
         </button>
       </div>

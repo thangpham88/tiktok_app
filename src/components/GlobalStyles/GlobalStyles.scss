@@ -6,6 +6,7 @@
   --primary-link-color: rgba(22, 24, 35, 1);
   --black: #000;
   --white: #fff;
+  --font-family: 'ProximaNova', sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -63,7 +64,7 @@ html {
 }
 
 body {
-  font-family: 'ProximaNova', sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.6rem;
@@ -98,5 +99,5 @@ a {
 }
 
 input {
-  font-family: 'ProximaNova', sans-serif;
+  font-family: var(--font-family);
 }

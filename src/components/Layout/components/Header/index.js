@@ -12,19 +12,20 @@ import {
   faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-
+import { faTiktok } from '@fortawesome/free-brands-svg-icons';
+import { Link } from 'react-router-dom';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css'; // optional
 import classNames from 'classnames/bind';
+
 import styles from './Header.module.scss';
 import images from '~/assets/images';
-import { Link } from 'react-router-dom';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import SearchBox from '~/components/Popper/SearchBox';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css'; // optional
-import { faTiktok } from '@fortawesome/free-brands-svg-icons';
 import { IconEffects, IconInbox, IconSendMessage } from '~/components/Icon';
 import Image from '~/components/Image';
+import RoutersConfig from '~/config/routes';
 
 const cx = classNames.bind(styles);
 
@@ -104,7 +105,7 @@ function Header() {
       <div className={cx('header')}>
         <div className={cx('leftContainer')}>
           <div className={cx('logo')}>
-            <Link to="/">
+            <Link to={RoutersConfig.root}>
               <img src={images.logo} alt="TikTok"></img>
             </Link>
           </div>
@@ -117,14 +118,18 @@ function Header() {
 
         <div className={cx('rightContainer')}>
           <div className={cx('header-actions')}>
-            <Button greyOutline to="/upload" leftIcon={<FontAwesomeIcon className={cx('btn-icon')} icon={faPlus} />}>
+            <Button
+              greyOutline
+              to={RoutersConfig.upload}
+              leftIcon={<FontAwesomeIcon className={cx('btn-icon')} icon={faPlus} />}
+            >
               Upload
             </Button>
 
             {currentUser ? (
               <>
                 <Tippy content={<span>Create effects</span>} delay={100} interactive>
-                  <a className={cx('btn-create-effects')} href="https://effecthouse.tiktok.com/">
+                  <a className={cx('btn-create-effects')} href={RoutersConfig.effect}>
                     <IconEffects />
                   </a>
                 </Tippy>
@@ -153,7 +158,7 @@ function Header() {
                 </Button>
 
                 <Tippy content={<span>Create effects</span>} delay={100} interactive>
-                  <a className={cx('btn-create-effects')} href="https://effecthouse.tiktok.com/">
+                  <a className={cx('btn-create-effects')} href={RoutersConfig.effect}>
                     <IconEffects />
                   </a>
                 </Tippy>
