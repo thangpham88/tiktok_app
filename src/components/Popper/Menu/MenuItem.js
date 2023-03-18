@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Menu.module.scss';
@@ -40,5 +41,13 @@ function MenuItem({ title, icon, toogleOnOff = false, splitterTop = false, onCli
     </div>
   );
 }
+
+MenuItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.node,
+  toogleOnOff: PropTypes.bool,
+  splitterTop: PropTypes.bool,
+  onClick: PropTypes.func,
+};
 
 export default MenuItem;

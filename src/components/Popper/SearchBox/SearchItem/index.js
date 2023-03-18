@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from './SearchItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,5 +18,9 @@ function SearchItem({ data }) {
     </div>
   );
 }
+
+SearchItem.propTypes = {
+  data: PropTypes.node.isRequired,
+};
 
 export default SearchItem;

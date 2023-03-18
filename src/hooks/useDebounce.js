@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 function useDebounce(value = '', delay) {
@@ -11,5 +12,10 @@ function useDebounce(value = '', delay) {
 
   return debounceValue;
 }
+
+useDebounce.propTypes = {
+  value: PropTypes.string,
+  delay: PropTypes.number,
+};
 
 export default useDebounce;

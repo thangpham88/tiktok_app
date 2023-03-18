@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import images from '~/assets/images';
 import classNames from 'classnames';
@@ -20,5 +21,11 @@ function Image({ src, alt, className, ...props }) {
     ></img>
   );
 }
+
+Image.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
 
 export default Image;

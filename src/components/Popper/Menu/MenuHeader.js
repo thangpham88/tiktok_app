@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from './Menu.module.scss';
 
@@ -14,5 +15,11 @@ function MenuHeader({ title, icon, onBack }) {
     </div>
   );
 }
+
+MenuHeader.propTypes = {
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.node,
+  onBack: PropTypes.func,
+};
 
 export default MenuHeader;
