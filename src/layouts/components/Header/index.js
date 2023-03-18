@@ -25,7 +25,7 @@ import Menu from '~/components/Popper/Menu';
 import SearchBox from '~/components/Popper/SearchBox';
 import { IconEffects, IconInbox, IconSendMessage } from '~/components/Icon';
 import Image from '~/components/Image';
-import RoutersConfig from '~/config/routes';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -105,7 +105,7 @@ function Header() {
       <div className={cx('header')}>
         <div className={cx('leftContainer')}>
           <div className={cx('logo')}>
-            <Link to={RoutersConfig.root}>
+            <Link to={config.routers.root}>
               <img src={images.logo} alt="TikTok"></img>
             </Link>
           </div>
@@ -120,7 +120,7 @@ function Header() {
           <div className={cx('header-actions')}>
             <Button
               greyOutline
-              to={RoutersConfig.upload}
+              to={config.routers.upload}
               leftIcon={<FontAwesomeIcon className={cx('btn-icon')} icon={faPlus} />}
             >
               Upload
@@ -128,28 +128,38 @@ function Header() {
 
             {currentUser ? (
               <>
-                <Tippy content={<span>Create effects</span>} delay={100} interactive>
-                  <a className={cx('btn-create-effects')} href={RoutersConfig.effect}>
-                    <IconEffects />
-                  </a>
-                </Tippy>
+                <span className={cx('span-tippy')}>
+                  <Tippy content={<span>Create effects</span>} delay={100} interactive>
+                    <a className={cx('btn-create-effects')} href={config.routers.effect}>
+                      <IconEffects />
+                    </a>
+                  </Tippy>
+                </span>
 
-                <Tippy content={<span>Messages</span>} delay={100} interactive>
-                  <div className={cx('message')}>
-                    <IconSendMessage />
-                  </div>
-                </Tippy>
+                <span className={cx('span-tippy')}>
+                  <Tippy content={<span>Messages</span>} delay={100} interactive>
+                    <div className={cx('message')}>
+                      <IconSendMessage />
+                    </div>
+                  </Tippy>
+                </span>
 
-                <Tippy content={<span>Inbox</span>} delay={100} interactive>
-                  <div className={cx('inbox')}>
-                    <IconInbox />
-                  </div>
-                </Tippy>
-                <Menu items={MENU_USER}>
-                  <div className={cx('profile')}>
-                    <Image src={images.profile_ava_demo} className={cx('profileImg')} alt="Profile" />
-                  </div>
-                </Menu>
+                <span className={cx('span-tippy')}>
+                  <Tippy content={<span>Inbox</span>} delay={100} interactive>
+                    <div className={cx('inbox')}>
+                      <IconInbox />
+                      <span className={cx('inboxSupBadge')}>8</span>
+                    </div>
+                  </Tippy>
+                </span>
+
+                <span className={cx('span-tippy')}>
+                  <Menu items={MENU_USER}>
+                    <div className={cx('profile')}>
+                      <Image src={images.profile_ava_demo} className={cx('profileImg')} alt="Profile" />
+                    </div>
+                  </Menu>
+                </span>
               </>
             ) : (
               <>
@@ -157,17 +167,21 @@ function Header() {
                   Login
                 </Button>
 
-                <Tippy content={<span>Create effects</span>} delay={100} interactive>
-                  <a className={cx('btn-create-effects')} href={RoutersConfig.effect}>
-                    <IconEffects />
-                  </a>
-                </Tippy>
+                <span className={cx('span-tippy')}>
+                  <Tippy content={<span>Create effects</span>} delay={100} interactive>
+                    <a className={cx('btn-create-effects')} href={config.routers.effect}>
+                      <IconEffects />
+                    </a>
+                  </Tippy>
+                </span>
 
-                <Menu items={MENU_HEADER}>
-                  <div className={cx('see-more')}>
-                    <FontAwesomeIcon icon={faEllipsisVertical} />
-                  </div>
-                </Menu>
+                <span className={cx('span-tippy')}>
+                  <Menu items={MENU_HEADER}>
+                    <div className={cx('see-more')}>
+                      <FontAwesomeIcon icon={faEllipsisVertical} />
+                    </div>
+                  </Menu>
+                </span>
               </>
             )}
           </div>

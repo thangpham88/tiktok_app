@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { publicRoutes } from '~/routes';
-import { DefaultLayout } from '~/components/Layout';
+import { MainLayout } from '~/layouts';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
             // eslint-disable-next-line
             publicRoutes.map((route, index) => {
               const Page = route.component;
-              const Layout = route.layout === null ? Fragment : route.layout || DefaultLayout;
+              const Layout = route.layout === null ? Fragment : route.layout || MainLayout;
               return (
                 <Route
                   key={index}

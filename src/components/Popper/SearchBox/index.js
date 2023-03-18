@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconSearch } from '~/components/Icon';
 import { faSpinner, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
 import { useDebounce } from '~/hooks';
-import searchService from '~/apis/search';
+import search from '~/services/search';
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +26,7 @@ function SearchBox() {
     if (!!debounceSearchValue) {
       const searchAPI = async () => {
         setLoading(true);
-        const res = await searchService(debounceSearchValue);
+        const res = await search(debounceSearchValue);
         setSearchResult(res.filter((data) => data.full_name.length > 0));
         setLoading(false);
       };
