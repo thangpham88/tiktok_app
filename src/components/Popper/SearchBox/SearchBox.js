@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import styles from './SearchBox.module.scss';
 import SearchItem from './SearchItem';
 import AccountItem from './AccountItem';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconSearch } from '~/components/Icon';
 import { faSpinner, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
@@ -20,13 +20,13 @@ function SearchBox() {
   const [searchActive, setSearchActive] = useState(false);
   const [loading, setLoading] = useState(false);
   const searchInputElement = useRef();
-  const debounceSearchValue = useDebounce(searchValue, 600);
+  const debouncedSearchValue = useDebounce(searchValue, 600);
 
   useEffect(() => {
-    if (!!debounceSearchValue) {
+    if (!!debouncedSearchValue) {
       const searchAPI = async () => {
         setLoading(true);
-        const res = await search(debounceSearchValue);
+        const res = await search(debouncedSearchValue);
         setSearchResult(res.filter((data) => data.full_name.length > 0));
         setLoading(false);
       };
@@ -34,7 +34,21 @@ function SearchBox() {
     } else {
       setSearchResult([]);
     }
-  }, [debounceSearchValue]);
+  }, [debouncedSearchValue]);
+
+  const displaySearchValues = useMemo(() => {
+    const result = searchResult.map((result, index) => {
+      return <SearchItem key={index} data={result.full_name} />;
+    });
+    return result;
+  }, [searchResult]);
+
+  const displaySearchAccounts = useMemo(() => {
+    const result = searchResult.map((result, index) => {
+      return <AccountItem key={index} data={result} />;
+    });
+    return result;
+  }, [searchResult]);
 
   const handleReset = () => {
     setSearchValue('');
@@ -56,13 +70,11 @@ function SearchBox() {
       render={(attrs) => (
         <div className={cx('search-result-suggest')} tabIndex="-1" {...attrs}>
           <PopperWrapper>
-            {searchResult.map((result, index) => {
-              return <SearchItem key={index} data={result.full_name} />;
-            })}
-            <h3 className={cx('sug-account')}>Accounts</h3>
-            {searchResult.map((result, index) => {
-              return <AccountItem key={index} data={result} />;
-            })}
+            <div>
+              {displaySearchValues}
+              <h3 className={cx('sug-account')}>Accounts</h3>
+              {displaySearchAccounts}
+            </div>
           </PopperWrapper>
         </div>
       )}
