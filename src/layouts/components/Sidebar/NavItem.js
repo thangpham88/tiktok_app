@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from './Sidebar.module.scss';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -15,13 +15,13 @@ function NavItem({ href, to, title, icon, onClick, children }) {
     Comp = 'a';
     props.href = href;
   } else if (to) {
-    Comp = Link;
+    Comp = NavLink;
     props.to = to;
   }
 
   return (
     <div className={cx('nav-wrapper')} onClick={onClick}>
-      <Comp {...props}>
+      <Comp {...props} className={({ isActive }) => (isActive ? cx('navItem-active') : cx('navItem-inactive'))}>
         {!!icon && <div className={cx('navItem-icon')}>{icon}</div>}
         <span className={cx('navItem-text')}>
           {!!title && <span>{title}</span>}

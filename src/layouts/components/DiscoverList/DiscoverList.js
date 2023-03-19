@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import { IconStyledMusicNote, IconStyledNumber } from '~/components/Icon';
 import styles from './DiscoverList.module.scss';
 import classNames from 'classnames/bind';
@@ -23,5 +23,9 @@ function DiscoverList({ data = [] }) {
     </div>
   );
 }
+
+DiscoverList.propTypes = {
+  data: PropTypes.array,
+};
 
 export default DiscoverList;

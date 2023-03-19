@@ -6,7 +6,7 @@ import images from '~/assets/images';
 
 const cx = classNames.bind(styles);
 
-function StyledButton({ to, href, disabled = false, effects, children, onClick, ...passProps }) {
+function StyledButton({ to, href, disabled = false, outline = false, effects, children, onClick, ...passProps }) {
   let Comp = 'button';
 
   const props = {
@@ -36,6 +36,7 @@ function StyledButton({ to, href, disabled = false, effects, children, onClick, 
 
   const classes = cx('styledButton-Wrapper', {
     disabled,
+    outline,
   });
 
   return (
@@ -58,6 +59,7 @@ function StyledButton({ to, href, disabled = false, effects, children, onClick, 
 StyledButton.propTypes = {
   to: Proptypes.string,
   href: Proptypes.string,
+  outline: Proptypes.bool,
   effects: Proptypes.bool,
   disabled: Proptypes.bool,
   children: Proptypes.node.isRequired,

@@ -9,6 +9,7 @@ const publicRoutes = [
   { path: config.routers.following, component: Following, title: 'FOLLOWING' },
   { path: config.routers.upload, component: Upload, title: 'UPLOAD', layout: HeaderOnly },
   { path: config.routers.search, component: Search, title: 'SEARCH' },
+  { path: config.routers.live, component: Home, title: 'LIVE' },
 ];
 
 const privateRoutes = [];

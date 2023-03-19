@@ -3,8 +3,10 @@ import AccountItem from '~/components/AccountItem';
 import { IconFollowing, IconHome, IconLive } from '~/components/Icon';
 import DiscoverList from '../DiscoverList';
 import Footer from '../Footer';
+import StyledButton from '../StyledButton';
 import List from './List';
 import NavItem from './NavItem';
+import Section from './Section';
 import styles from './Sidebar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -49,31 +51,43 @@ function Sidebar() {
 
   return (
     <aside className={cx('sideBar')}>
-      <List>
-        <NavItem href="/en" icon={<IconHome />}>
-          For You
-        </NavItem>
-        <NavItem href="/following" icon={<IconFollowing />}>
-          Following
-        </NavItem>
-        <NavItem href="/live" icon={<IconLive />}>
-          LIVE
-        </NavItem>
-      </List>
+      <Section>
+        <List>
+          <NavItem to="/en" icon={<IconHome />}>
+            For You
+          </NavItem>
+          <NavItem to="/following" icon={<IconFollowing />}>
+            Following
+          </NavItem>
+          <NavItem to="/live" icon={<IconLive />}>
+            LIVE
+          </NavItem>
+        </List>
+      </Section>
+      <Section>
+        <p className={cx('section-desc')}>Log in to follow creators, like videos, and view comments.</p>
+        <StyledButton outline>Log in</StyledButton>
+      </Section>
 
-      <List title="Suggested accounts">
-        <AccountItem data={AccountFakeData} />
-        <AccountItem data={AccountFakeData} />
-      </List>
+      <Section>
+        <List title="Suggested accounts">
+          <AccountItem data={AccountFakeData} />
+          <AccountItem data={AccountFakeData} />
+        </List>
+      </Section>
 
-      <List title="Following accounts">
-        <AccountItem data={AccountFakeData} />
-        <AccountItem data={AccountFakeData} />
-      </List>
+      <Section>
+        <List title="Following accounts">
+          <AccountItem data={AccountFakeData} />
+          <AccountItem data={AccountFakeData} />
+        </List>
+      </Section>
 
-      <List title="Discover">
-        <DiscoverList data={DiscoverFakeData} />
-      </List>
+      <Section>
+        <List title="Discover">
+          <DiscoverList data={DiscoverFakeData} />
+        </List>
+      </Section>
 
       <Footer />
     </aside>

@@ -5,6 +5,7 @@ const routersConfig = {
   following: '/following',
   upload: '/upload',
   search: '/search',
+  live: '/live',
   effect: 'https://effecthouse.tiktok.com/',
 };
 

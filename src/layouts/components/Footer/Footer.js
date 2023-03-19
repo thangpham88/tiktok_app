@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 function Footer() {
   return (
     <div className={cx('Footer-Container')}>
-      <div>
+      <div className={cx('Footer-Banner')}>
         <StyledButton href="https://effecthouse.tiktok.com/" target="_blank" effects>
           <IconEffects width="19px" height="19px" />
           <h4>Create effects</h4>
