@@ -1,6 +1,8 @@
 import classNames from 'classnames/bind';
+import { useContext } from 'react';
 import AccountItem from '~/components/AccountItem';
 import { IconFollowing, IconHome, IconLive } from '~/components/Icon';
+import { UserDataContext } from '~/context/UserDataContext';
 import DiscoverList from '../DiscoverList';
 import Footer from '../Footer';
 import StyledButton from '../StyledButton';
@@ -49,6 +51,16 @@ function Sidebar() {
     },
   ];
 
+  const defaultUser = { id: '12345', name: 'thang_pham88' };
+
+  const { userInfo, setUserInfo } = useContext(UserDataContext);
+
+  const handleLogin = () => {
+    setTimeout(() => {
+      setUserInfo(defaultUser);
+    }, 500);
+  };
+
   return (
     <aside className={cx('sideBar')}>
       <Section>
@@ -64,10 +76,15 @@ function Sidebar() {
           </NavItem>
         </List>
       </Section>
-      <Section>
-        <p className={cx('section-desc')}>Log in to follow creators, like videos, and view comments.</p>
-        <StyledButton outline>Log in</StyledButton>
-      </Section>
+
+      {!userInfo && (
+        <Section>
+          <p className={cx('section-desc')}>Log in to follow creators, like videos, and view comments.</p>
+          <StyledButton outline onClick={handleLogin}>
+            Log in
+          </StyledButton>
+        </Section>
+      )}
 
       <Section>
         <List title="Suggested accounts">
@@ -76,12 +93,14 @@ function Sidebar() {
         </List>
       </Section>
 
-      <Section>
-        <List title="Following accounts">
-          <AccountItem data={AccountFakeData} />
-          <AccountItem data={AccountFakeData} />
-        </List>
-      </Section>
+      {!!userInfo && (
+        <Section>
+          <List title="Following accounts">
+            <AccountItem data={AccountFakeData} />
+            <AccountItem data={AccountFakeData} />
+          </List>
+        </Section>
+      )}
 
       <Section>
         <List title="Discover">

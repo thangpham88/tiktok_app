@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEllipsisVertical,
@@ -26,12 +26,14 @@ import SearchBox from '~/components/Popper/SearchBox';
 import { IconEffectsColorful, IconInbox, IconSendMessage } from '~/components/Icon';
 import Image from '~/components/Image';
 import config from '~/config';
+import { UserDataContext } from '~/context/UserDataContext';
 
 const cx = classNames.bind(styles);
 
 function Header() {
   const defaultUser = { id: '12345', name: 'thang_pham88' };
-  const [currentUser, setCurrentUser] = useState(defaultUser);
+
+  const { userInfo, setUserInfo } = useContext(UserDataContext);
 
   const MENU_HEADER = [
     {
@@ -95,7 +97,7 @@ function Header() {
       icon: <FontAwesomeIcon icon={faSignOut} />,
       splitterTop: true,
       onClick: () => {
-        setTimeout(() => setCurrentUser(), 500);
+        setTimeout(() => setUserInfo(), 500);
       },
     },
   ];
@@ -126,7 +128,7 @@ function Header() {
               Upload
             </Button>
 
-            {currentUser ? (
+            {userInfo ? (
               <>
                 <span className={cx('span-tippy')}>
                   <Tippy content={<span>Create effects</span>} delay={100} interactive>
@@ -163,7 +165,7 @@ function Header() {
               </>
             ) : (
               <>
-                <Button primary onClick={() => setTimeout(() => setCurrentUser(defaultUser), 500)}>
+                <Button primary onClick={() => setTimeout(() => setUserInfo(defaultUser), 500)}>
                   Login
                 </Button>
 
