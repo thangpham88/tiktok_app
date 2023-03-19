@@ -4,7 +4,7 @@ import { PopperWrapper } from '~/components/Popper';
 import classNames from 'classnames/bind';
 import styles from './SearchBox.module.scss';
 import SearchItem from './SearchItem';
-import AccountItem from './AccountItem';
+import AccountItem from '../../AccountItem';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconSearch } from '~/components/Icon';
@@ -112,6 +112,6 @@ function SearchBox() {
   );
 }
 
-export { default as AccountItem } from './AccountItem/AccountItem';
+export { default as AccountItem } from '../../AccountItem/AccountItem';
 export { default as SearchItem } from './SearchItem/SearchItem';
 export default SearchBox;

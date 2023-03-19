@@ -74,8 +74,16 @@ body {
   line-height: 1.5;
   text-rendering: optimizeSpeed;
 
-  // Custom css of tippy box
+  a {
+    color: var(--primary-link-color);
+    text-decoration: none;
+  }
 
+  input {
+    font-family: var(--font-family);
+  }
+
+  // Custom css of tippy box
   .tippy-box {
     background: rgba(84, 84, 84, 0.92);
     padding: 8px;
@@ -95,12 +103,4 @@ body {
   .tippy-box[data-placement^='bottom'] > .tippy-arrow {
     top: -1px;
   }
-}
-
-a {
-  text-decoration: none;
-}
-
-input {
-  font-family: var(--font-family);
 }

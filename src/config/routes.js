@@ -1,5 +1,6 @@
 const routersConfig = {
   root: '/',
+  rootln: '/en',
   profile: '/@:nickname',
   following: '/following',
   upload: '/upload',

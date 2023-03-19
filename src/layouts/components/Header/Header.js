@@ -23,7 +23,7 @@ import images from '~/assets/images';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import SearchBox from '~/components/Popper/SearchBox';
-import { IconEffects, IconInbox, IconSendMessage } from '~/components/Icon';
+import { IconEffectsColorful, IconInbox, IconSendMessage } from '~/components/Icon';
 import Image from '~/components/Image';
 import config from '~/config';
 
@@ -131,7 +131,7 @@ function Header() {
                 <span className={cx('span-tippy')}>
                   <Tippy content={<span>Create effects</span>} delay={100} interactive>
                     <a className={cx('btn-create-effects')} href={config.routers.effect}>
-                      <IconEffects />
+                      <IconEffectsColorful />
                     </a>
                   </Tippy>
                 </span>
@@ -170,7 +170,7 @@ function Header() {
                 <span className={cx('span-tippy')}>
                   <Tippy content={<span>Create effects</span>} delay={100} interactive>
                     <a className={cx('btn-create-effects')} href={config.routers.effect}>
-                      <IconEffects />
+                      <IconEffectsColorful />
                     </a>
                   </Tippy>
                 </span>

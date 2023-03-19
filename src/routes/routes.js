@@ -4,6 +4,7 @@ import config from '~/config';
 
 const publicRoutes = [
   { path: config.routers.root, component: Home, title: 'HOME' },
+  { path: config.routers.rootln, component: Home, title: 'HOME' },
   { path: config.routers.profile, component: Profile, title: 'PROFILE' },
   { path: config.routers.following, component: Following, title: 'FOLLOWING' },
   { path: config.routers.upload, component: Upload, title: 'UPLOAD', layout: HeaderOnly },
